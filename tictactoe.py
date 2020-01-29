@@ -18,7 +18,7 @@ class Board(object):
 
         pass
 
-    def mark_square(self, column, row, player):
+    def mark_square(self, move):
         """
         Marks a square at coordinate (column, row) for player
 
@@ -28,7 +28,7 @@ class Board(object):
 
         :return: ????
         """
-        player = player.upper()
+        player = move[2].upper()
         if column > 3 or row > 3:
             print("Not a valid position!")
             return 1
@@ -81,7 +81,7 @@ class Board(object):
         """
         while self.over is False:
             move=self.getMove()
-            if move = -1:
+            if move == -1:
                 continue
             self.mark_square(move)
             self.print_board()
