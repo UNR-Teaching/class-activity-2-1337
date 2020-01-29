@@ -26,19 +26,13 @@ class Board(object):
 
         :return: ????
         """
-        player = move[2].upper()
+        print(move)
         column = move[0]
         row = move[1]
-
-        if column > 3 or row > 3:
-            print("Not a valid position!")
-            return 1
-        if player != "X" and player != 'O':
-            print("Invalid player!")
-            return 1
+        player = move[2].upper()
 
         self.board[row][column] = player
-        return 0
+        return self.board
 
     def has_winner(self):
         print(f'Winner: {self.winner.check_all_cases(self.board)}')
@@ -48,24 +42,21 @@ class Board(object):
         for pos in self.board:
             print(f"{pos[0]}\t{pos[1]}\t{pos[2]}")
 
-    def getMove(self):
-        move = input("Input a move(column, row, player): ")
+    def parse_move(self,move):
         moveArr = move.split(',')
-        if len(moveArr) != 3:
-            print("Invalid move")
-            return 1
-        if len(moveArr[0]) != 1 and len(moveArr[1]) != 1 and len(moveArr[2]):
-            print("Invalid move")
-            return 1
-        if moveArr[0].isnumeric() is False and int(moveArr[0]) > 3:
-            print("Invalid column")
-            return 1
-        if moveArr[1].isnumeric() is False and int(moveArr[0]) > 3:
-            print("Invalid row")
-            return 1
-
         print(moveArr)
-        return int(moveArr[0]), int(moveArr[1]), moveArr[2]
+        if len(moveArr) != 3:
+            return -1
+        if len(moveArr[0]) != 1 and len(moveArr[1]) != 1 and len(moveArr[2]):
+            return -1
+        if moveArr[0].isnumeric() is False or int(moveArr[0]) > 3 or int(moveArr[0]) < 0:
+            return -1
+        if moveArr[1].isnumeric() is False or int(moveArr[1]) > 3 or int(moveArr[1]) < 0:
+            return -1
+        if moveArr[2].upper() != "X" and moveArr[2].upper() != 'O':
+            return -1
+
+        return (int(moveArr[0]), int(moveArr[1]), moveArr[2].upper())
 
     def play_game(self):
         """
@@ -75,10 +66,12 @@ class Board(object):
         :return: (str) the letter representing the player who won
         """
         while self.over is False:
-            move = self.getMove()
-            if move == -1:
+            move = input("Input a move(column, row, player): ")
+            valid_move=self.parse_move(move)
+            if valid_move == -1:
+                print("Invalid move!")
                 continue
-            self.mark_square(move)
+            self.mark_square(valid_move)
             self.print_board()
             if self.has_winner() == 1:
                 return 1
