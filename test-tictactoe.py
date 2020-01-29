@@ -35,6 +35,14 @@ class Test(unittest.TestCase):
         self.assertEqual(board.mark_square((0,0,'X')),[['X','_','_'],['_','_','_'],['_','_','_']])
         self.assertEqual(board.mark_square((0,0,'O')),[['X','_','_'],['_','_','_'],['_','_','_']])
 
+    """
+    def test_cats_game(self):
+        board = Board()
+        board.board=[['X','X','X'],['X','X','X'],['X','X','X']]
+        self.assertEqual(board.mark_square((0,0,'X')),[['X','_','_'],['_','_','_'],['_','_','_']])
+        self.assertEqual(board.mark_square((0,0,'O')),[['X','_','_'],['_','_','_'],['_','_','_']])
+        """
+
     def test_split(self):
         s = 'hello world'
         self.assertEqual(s.split(), ['hello', 'world'])
