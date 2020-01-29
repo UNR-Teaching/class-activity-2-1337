@@ -29,6 +29,8 @@ class Board(object):
         column = move[0]
         row = move[1]
         player = move[2].upper()
+        if self.board[row][column] is not '_':
+            return self.board
 
         self.board[row][column] = player
         return self.board
