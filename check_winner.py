@@ -6,7 +6,7 @@ class CheckWinner(object):
     def check_all_cases(self, board):
         values = []
         values.append(self.player_1_first_row(board))
-        values.append(self.player_1_first_row(board))
+        values.append(self.player_1_second_row(board))
         values.append(self.player_1_third_row(board))
         values.append(self.player_1_first_col(board))
         values.append(self.player_1_second_col(board))
@@ -14,7 +14,7 @@ class CheckWinner(object):
         values.append(self.player_1_left_diag(board))
         values.append(self.player_1_right_diag(board))
         values.append(self.player_2_first_row(board))
-        values.append(self.player_2_first_row(board))
+        values.append(self.player_2_second_row(board))
         values.append(self.player_2_third_row(board))
         values.append(self.player_2_first_col(board))
         values.append(self.player_2_second_col(board))
