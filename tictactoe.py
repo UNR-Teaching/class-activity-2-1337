@@ -36,14 +36,13 @@ class Board(object):
         return self.board
 
     def has_winner(self):
-        print(f'Winner: {self.winner.check_all_cases(self.board)}')
         return self.winner.check_all_cases(self.board)
 
     def print_board(self):
         for pos in self.board:
             print(f"{pos[0]}\t{pos[1]}\t{pos[2]}")
 
-    def parse_move(self,move):
+    def parse_move(self, move):
         moveArr = move.split(',')
         if len(moveArr) != 3:
             return -1
@@ -56,7 +55,18 @@ class Board(object):
         if moveArr[2].upper() != "X" and moveArr[2].upper() != 'O':
             return -1
 
-        return (int(moveArr[0]), int(moveArr[1]), moveArr[2].upper())
+        return int(moveArr[0]), int(moveArr[1]), moveArr[2].upper()
+
+    def check_cats_game(self):
+        c = 0
+        for i in range(0, 2):
+            for j in range(0, 2):
+                if self.board[i][j] == '_':
+                    c += 1
+        if c == 0:
+            return True
+        else:
+            return False
 
     def play_game(self):
         """
@@ -67,12 +77,13 @@ class Board(object):
         """
         while self.over is False:
             move = input("Input a move(column, row, player): ")
-            valid_move=self.parse_move(move)
+            valid_move = self.parse_move(move)
             if valid_move == -1:
                 print("Invalid move!")
                 continue
             self.mark_square(valid_move)
             self.print_board()
+            self.check_cats_game()
             if self.has_winner() == 1:
                 return 1
             elif self.has_winner() == 2:
@@ -85,6 +96,6 @@ if __name__ == '__main__':
     board = Board()
     winner = board.play_game()
     if winner == 1 or winner == 2:
-        print(f"{winner} has won!")
+        print(f"Player {winner} has won!")
     else:
         print("Cat's game, no one wins")
