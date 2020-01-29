@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from check_winner import CheckWinner
 """ Note: Although the skeleton below is in Python, you may use any programming language you want so long as the language supports object-oriented programming,
           and you make use of relevant object-oriented design principles.
 """
@@ -10,21 +11,18 @@ class Board(object):
         """
         Initializes the Board of size 3x3
         """
-        self.board = [['_','_','_'],
-
-                      ['_','_','_'],
-                      ['_','_','_']]
+        self.board = [['_', '_', '_'],
+                      ['_', '_', '_'],
+                      ['_', '_', '_']]
         self.over = False
-
+        self.winner = CheckWinner()
         pass
 
     def mark_square(self, move):
         """
         Marks a square at coordinate (column, row) for player
 
-        :param column: (int) the 0-indexed column of the Board to mark
-        :param row: (int) the 0-indexed row of the Board to mark
-        :param player: (str) the X or O representation of which player to mark in square
+        :param move: (tuple:(int,int,str)) column, row, player
 
         :return: ????
         """
@@ -43,23 +41,8 @@ class Board(object):
         return 0
 
     def has_winner(self):
-        """
-        Checks to see if there is a current winner of the game
-
-        :return: ????
-        """
-        # Check if player 1 has won on horizontals
-        if board[0][0:2] == 'X' or board[1][0:2] == 'X' or board[2][0:2] == 'X':
-            return 1
-        # Check if player 1 has won on verticals
-        if board[0:2][0] == 'X' or board[0:2][1] == 'X' or board[0:2][2] == 'X':
-            return 1
-        # Check if player 2 has won on horizontals:
-        if board[0][0:2] == 'O' or board[1][0:2] == 'O' or board[2][0:2] == 'O':
-            return 2
-        # Check if player 1 has won on verticals
-        if board[0:2][0] == 'O' or board[0:2][1] == 'O' or board[0:2][2] == 'O':
-            return 2
+        print(f'Winner: {self.winner.check_all_cases(self.board)}')
+        return self.winner.check_all_cases(self.board)
 
     def print_board(self):
         for pos in self.board:
@@ -92,15 +75,23 @@ class Board(object):
         :return: (str) the letter representing the player who won
         """
         while self.over is False:
-            move=self.getMove()
+            move = self.getMove()
             if move == -1:
                 continue
             self.mark_square(move)
             self.print_board()
+            if self.has_winner() == 1:
+                return 1
+            elif self.has_winner() == 2:
+                return 2
 
         pass
+
 
 if __name__ == '__main__':
     board = Board()
     winner = board.play_game()
-    print(f"{winner} has won!")
+    if winner == 1 or winner == 2:
+        print(f"{winner} has won!")
+    else:
+        print("Cat's game, no one wins")
