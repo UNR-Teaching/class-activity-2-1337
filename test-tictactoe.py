@@ -9,14 +9,18 @@ class Test(unittest.TestCase):
         board = Board()
         self.assertEqual(board.parse_move('1,1,x'), (1,1,'X'))
         self.assertEqual(board.parse_move('1,1,o'), (1,1,'O'))
-        self.assertEqual(board.parse_move('1,e,o'), -1)
-        self.assertEqual(board.parse_move('1,1,e'), -1)
-        self.assertEqual(board.parse_move('-1,-1,x'), -1)
-        self.assertEqual(board.parse_move('4,4,x'), -1)
+        self.assertTrue(board.parse_move('1,e,o') is -1)
+        self.assertTrue(board.parse_move('1,1,e') is -1)
+        self.assertTrue(board.parse_move('-1,-1,x') is -1)
+        self.assertTrue(board.parse_move('4,4,x') is -1)
 
     def test_mark_square(self):
-        self.assertTrue('FOO'.isupper())
-        self.assertFalse('Foo'.isupper())
+        board = Board()
+        self.assertEqual(board.mark_square((1,1,'X')),[['_','_','_'],['_','X','_'],['_','_','_']])
+        board = Board()
+        self.assertEqual(board.mark_square((0,0,'O')),[['O','_','_'],['_','_','_'],['_','_','_']])
+        board = Board()
+        self.assertEqual(board.mark_square((2,2,'X')),[['_','_','_'],['_','_','_'],['_','_','X']])
 
     def test_split(self):
         s = 'hello world'

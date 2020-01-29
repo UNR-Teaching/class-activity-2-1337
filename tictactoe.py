@@ -28,7 +28,6 @@ class Board(object):
 
         :return: ????
         """
-        print(move)
         column = move[0]
         row = move[1]
         player = move[2].upper()
@@ -61,7 +60,6 @@ class Board(object):
 
     def parse_move(self,move):
         moveArr = move.split(',')
-        print(moveArr)
         if len(moveArr) != 3:
             return -1
         if len(moveArr[0]) != 1 and len(moveArr[1]) != 1 and len(moveArr[2]):
