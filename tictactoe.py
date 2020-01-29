@@ -32,7 +32,7 @@ class Board(object):
         if column > 3 or row > 3:
             print("Not a valid position!")
             return 1
-        if player is not "X" or player is not "O":
+        if player != "X" and player != 'O':
             print("Invalid player!")
             return 1
 
@@ -50,7 +50,27 @@ class Board(object):
 
         pass
     def print_board(self):
+        for pos in self.board:
+            print(f"{pos[0]}\t{pos[1]}\t{pos[2]}")
 
+    def getMove(self):
+        move = input("Input a move(column, row, player): ")
+        moveArr = move.split(',')
+        if len(moveArr) != 3:
+            print("Invalid move")
+            return 1
+        if len(moveArr[0]) != 1 and len(moveArr[1]) != 1 and len(moveArr[2]):
+            print("Invalid move")
+            return 1
+        if moveArr[0].isnumeric() is False and int(moveArr[0]) > 3:
+            print("Invalid column")
+            return 1
+        if moveArr[1].isnumeric() is False and int(moveArr[0]) > 3:
+            print("Invalid row")
+            return 1
+
+        print(moveArr)
+        return (int(moveArr[0]),int(moveArr[1]),moveArr[2])
 
     def play_game(self):
         """
@@ -60,11 +80,12 @@ class Board(object):
         :return: (str) the letter representing the player who won
         """
         while self.over is False:
-            move = input("Input a move(column, row, player): ")
-            moveArr = move.split(',')
-            mark_square(moveArr[0],moveArr[1],moveArr[2])
+            move=self.getMove()
+            if move = -1:
+                continue
+            self.mark_square(move)
+            self.print_board()
 
-        pass
 
 if __name__ == '__main__':
     board = Board()
