@@ -2,6 +2,8 @@
 
 Tic-Tac-Toe Exercise
 
+Ian Grant & Clayton Franklin
+
 ### Problem 1
 Implement a simplified object-oriented tic-tac-toe game to be played via a command-line interface.
 
