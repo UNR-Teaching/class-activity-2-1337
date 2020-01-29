@@ -34,7 +34,7 @@ class Board(object):
         player = move[2].upper()
 
         self.board[row][column] = player
-        return 0
+        return self.board
 
     def has_winner(self):
         """
@@ -59,23 +59,18 @@ class Board(object):
         for pos in self.board:
             print(f"{pos[0]}\t{pos[1]}\t{pos[2]}")
 
-    def parseMove(self,move):
+    def parse_move(self,move):
         moveArr = move.split(',')
         print(moveArr)
         if len(moveArr) != 3:
-            print("Invalid move")
             return -1
         if len(moveArr[0]) != 1 and len(moveArr[1]) != 1 and len(moveArr[2]):
-            print("Invalid move")
             return -1
-        if moveArr[0].isnumeric() is False or int(moveArr[0]) > 3:
-            print("Invalid column")
+        if moveArr[0].isnumeric() is False or int(moveArr[0]) > 3 or int(moveArr[0]) < 0:
             return -1
-        if moveArr[1].isnumeric() is False or int(moveArr[0]) > 3:
-            print("Invalid row")
+        if moveArr[1].isnumeric() is False or int(moveArr[1]) > 3 or int(moveArr[1]) < 0:
             return -1
         if moveArr[2].upper() != "X" and moveArr[2].upper() != 'O':
-            print("Invalid player!")
             return -1
 
         return (int(moveArr[0]), int(moveArr[1]), moveArr[2].upper())
@@ -89,8 +84,9 @@ class Board(object):
         """
         while self.over is False:
             move = input("Input a move(column, row, player): ")
-            valid_move=self.parseMove(move)
+            valid_move=self.parse_move(move)
             if valid_move == -1:
+                print("Invalid move!")
                 continue
             self.mark_square(valid_move)
             self.print_board()
