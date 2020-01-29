@@ -2,6 +2,7 @@
 
 import unittest
 from tictactoe import *
+from check_winner import CheckWinner
 
 class Test(unittest.TestCase):
 
@@ -42,6 +43,15 @@ class Test(unittest.TestCase):
         self.assertEqual(board.mark_square((0,0,'X')),[['X','_','_'],['_','_','_'],['_','_','_']])
         self.assertEqual(board.mark_square((0,0,'O')),[['X','_','_'],['_','_','_'],['_','_','_']])
         """
+
+    def test_check_all_cases(self):
+        winner = CheckWinner()
+        board = [['X', 'X', 'X'], ['_', '_', '_'], ['_', '_', '_']]
+        self.assertEqual(winner.check_all_cases(board), 1)
+        board = [['X', '_', 'X'], ['_', '_', '_'], ['_', '_', '_']]
+        self.assertEqual(winner.check_all_cases(board), None)
+        board = [['O', 'O', 'O'], ['_', '_', '_'], ['_', '_', '_']]
+        self.assertEqual(winner.check_all_cases(board), 2)
 
     def test_split(self):
         s = 'hello world'
