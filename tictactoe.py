@@ -29,6 +29,8 @@ class Board(object):
         :return: ????
         """
         player = player.upper()
+        column = int(column)
+        row = int(row)
         if column > 3 or row > 3:
             print("Not a valid position!")
             return 1
@@ -47,8 +49,19 @@ class Board(object):
 
         :return: ????
         """
+        # Check if player 1 has won on horizontals
+        if board[0][0:2] == 'X' or board[1][0:2] == 'X' or board[2][0:2] == 'X':
+            return 1
+        # Check if player 1 has won on verticals
+        if board[0:2][0] == 'X' or board[0:2][1] == 'X' or board[0:2][2] == 'X':
+            return 1
+        # Check if player 2 has won on horizontals:
+        if board[0][0:2] == 'O' or board[1][0:2] == 'O' or board[2][0:2] == 'O':
+            return 2
+        # Check if player 1 has won on verticals
+        if board[0:2][0] == 'O' or board[0:2][1] == 'O' or board[0:2][2] == 'O':
+            return 2
 
-        pass
     def print_board(self):
         for pos in self.board:
             print(f"{pos[0]}\t{pos[1]}\t{pos[2]}")
@@ -70,7 +83,7 @@ class Board(object):
             return 1
 
         print(moveArr)
-        return (int(moveArr[0]),int(moveArr[1]),moveArr[2])
+        return int(moveArr[0]), int(moveArr[1]), moveArr[2]
 
     def play_game(self):
         """
@@ -81,11 +94,12 @@ class Board(object):
         """
         while self.over is False:
             move=self.getMove()
-            if move = -1:
+            if move == -1:
                 continue
             self.mark_square(move)
             self.print_board()
 
+        pass
 
 if __name__ == '__main__':
     board = Board()
