@@ -2,7 +2,7 @@
 
 
 class Player:
-    def __init__(self,id):
+    def __init__(self, id):
         self.id = id
     def send_move(self,board,move):
         valid = board.parse_move(move)
