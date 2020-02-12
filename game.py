@@ -34,10 +34,10 @@ class Game(object):
             winner = self.check_over()
             if winner != -1:
                 return winner
-            self.p1.get_move()
+            self.p1.get_move(self.board)
             self.board.print_board()
             winner = self.check_over()
             if winner != -1:
                 return winner
-            self.p2.get_move()
+            self.p2.get_move(self.board)
 

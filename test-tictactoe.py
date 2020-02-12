@@ -3,22 +3,25 @@
 import unittest
 from tictactoe import *
 from check_winner import check_all_cases
-from player import Player
+
 
 class Test(unittest.TestCase):
 
     def test_parseMove_lower_player(self):
         board = Board()
-        self.assertEqual(board.parse_move('1,1,x'), (1,1,'X'))
-        self.assertEqual(board.parse_move('1,1,o'), (1,1,'O'))
+        self.assertEqual(board.parse_move('1,1,x'), (1, 1, 'X'))
+        self.assertEqual(board.parse_move('1,1,o'), (1, 1, 'O'))
+
     def test_parseMove_upper_player(self):
         board = Board()
-        self.assertEqual(board.parse_move('1,1,X'), (1,1,'X'))
-        self.assertEqual(board.parse_move('1,1,O'), (1,1,'O'))
+        self.assertEqual(board.parse_move('1,1,X'), (1, 1, 'X'))
+        self.assertEqual(board.parse_move('1,1,O'), (1, 1, 'O'))
+
     def test_parseMove_ivalid_position(self):
         board = Board()
         self.assertTrue(board.parse_move('1,e,o') is -1)
         self.assertTrue(board.parse_move('e,1,o') is -1)
+
     def test_parseMove_outside_board(self):
         board = Board()
         self.assertTrue(board.parse_move('-1,-1,x') is -1)
@@ -26,16 +29,16 @@ class Test(unittest.TestCase):
 
     def test_mark_square(self):
         board = Board()
-        self.assertEqual(board.mark_square((1,1,'X')),[['_','_','_'],['_','X','_'],['_','_','_']])
+        self.assertEqual(board.mark_square((1, 1, 'X')), [['_', '_', '_'], ['_', 'X', '_'], ['_', '_', '_']])
         board = Board()
-        self.assertEqual(board.mark_square((0,0,'O')),[['O','_','_'],['_','_','_'],['_','_','_']])
+        self.assertEqual(board.mark_square((0, 0, 'O')), [['O', '_', '_'], ['_', '_', '_'], ['_', '_', '_']])
         board = Board()
-        self.assertEqual(board.mark_square((2,2,'X')),[['_','_','_'],['_','_','_'],['_','_','X']])
+        self.assertEqual(board.mark_square((2, 2, 'X')), [['_', '_', '_'], ['_', '_', '_'], ['_', '_', 'X']])
 
     def test_overwire_test(self):
         board = Board()
-        self.assertEqual(board.mark_square((0,0,'X')),[['X','_','_'],['_','_','_'],['_','_','_']])
-        self.assertEqual(board.mark_square((0,0,'O')),[['X','_','_'],['_','_','_'],['_','_','_']])
+        self.assertEqual(board.mark_square((0, 0, 'X')), [['X', '_', '_'], ['_', '_', '_'], ['_', '_', '_']])
+        self.assertEqual(board.mark_square((0, 0, 'O')), [['X', '_', '_'], ['_', '_', '_'], ['_', '_', '_']])
 
     def test_check_all_cases(self):
         board = [['X', 'X', 'X'], ['_', '_', '_'], ['_', '_', '_']]
@@ -47,9 +50,9 @@ class Test(unittest.TestCase):
 
     def test_Player_send_move(self):
         board = [['X', 'X', 'X'], ['_', '_', '_'], ['_', '_', '_']]
-        wantBoard = [['X', 'X', 'X'], ['_','X','_'], ['_', '_', '_']]
+        wantBoard = [['X', 'X', 'X'], ['_', 'X', '_'], ['_', '_', '_']]
         player = Player('X')
-        player.send_move(board,"2,2,X")
+        player.send_move(board, "2,2,X")
         self.assertEqual(board, wantBoard)
 
 

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from check_winner import check_all_cases
+
 
 class Board(object):
     def __init__(self):
@@ -8,9 +10,6 @@ class Board(object):
         self.board = [['_', '_', '_'],
                       ['_', '_', '_'],
                       ['_', '_', '_']]
-        self.over = False
-        self.winner = CheckWinner()
-        pass
 
     def mark_square(self, move):
         """
@@ -30,16 +29,16 @@ class Board(object):
         return self.board
 
     def has_winner(self):
-        return self.winner.check_all_cases(self.board)
+        return check_all_cases(self.board)
 
     def print_board(self):
         for pos in self.board:
             print(f"{pos[0]}\t{pos[1]}\t{pos[2]}")
 
-    def recv_move(self,move,player_id):
+    def recv_move(self, move, player_id):
         move = self.parse_move(move)
         if move == -1:
-           return move
+            return move
         else:
             self.mark_square(move)
 
@@ -68,4 +67,3 @@ class Board(object):
             return True
         else:
             return False
-
