@@ -6,6 +6,21 @@ class Game(object):
         self.board = board
         self.p1 = p1
         self.p2 = p2
+        self.over = False
+
+    def check_over(self):
+        """
+        Checks if the game is over
+        :return: the id of the winning player
+        """
+        if self.board.check_cats_game():
+            return 0
+        if self.board.has_winner() == 1:
+            return 1
+        elif self.board.has_winner() == 2:
+            return 2
+        else:
+            return -1
 
     def play_game(self):
         """
@@ -15,16 +30,14 @@ class Game(object):
             :return: (str) the letter representing the player who won
         """
         while self.over is False:
-            move = input("Input a move(column, row, player): ")
-            valid_move = self.parse_move(move)
-            if valid_move == -1:
-                print("Invalid move!")
-                continue
-            self.mark_square(valid_move)
-            self.print_board()
-            self.check_cats_game()
-            if self.has_winner() == 1:
-                return 1
-            elif self.has_winner() == 2:
-                return 2
+            self.board.print_board()
+            winner = self.check_over()
+            if winner != -1:
+                return winner
+            self.p1.get_move()
+            self.board.print_board()
+            winner = self.check_over()
+            if winner != -1:
+                return winner
+            self.p2.get_move()
 
