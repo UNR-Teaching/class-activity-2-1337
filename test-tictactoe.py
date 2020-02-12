@@ -49,11 +49,12 @@ class Test(unittest.TestCase):
         self.assertEqual(check_all_cases(board), 2)
 
     def test_Player_send_move(self):
-        board = [['X', 'X', 'X'], ['_', '_', '_'], ['_', '_', '_']]
-        wantBoard = [['X', 'X', 'X'], ['_', 'X', '_'], ['_', '_', '_']]
+        board = Board()
+        board.board = [['X', 'X', 'X'], ['_', '_', '_'], ['_', '_', '_']]
+        wantBoard = [['X', 'X', 'X'], ['_','X','_'], ['_', '_', '_']]
         player = Player('X')
-        player.send_move(board, "2,2,X")
-        self.assertEqual(board, wantBoard)
+        player.send_move(board,"2,2,X")
+        self.assertEqual(board.board, wantBoard)
 
 
 if __name__ == '__main__':
