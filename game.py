@@ -13,12 +13,12 @@ class Game(object):
         Checks if the game is over
         :return: the id of the winning player
         """
-        if self.board.check_cats_game():
-            return 0
         if self.board.has_winner() == 1:
             return 1
         elif self.board.has_winner() == 2:
             return 2
+        elif self.board.check_cats_game():
+            return 0
         else:
             return -1
 

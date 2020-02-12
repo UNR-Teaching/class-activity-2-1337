@@ -17,7 +17,7 @@ class Test(unittest.TestCase):
         self.assertEqual(board.parse_move('1,1,X'), (1, 1, 'X'))
         self.assertEqual(board.parse_move('1,1,O'), (1, 1, 'O'))
 
-    def test_parseMove_ivalid_position(self):
+    def test_parseMove_invalid_position(self):
         board = Board()
         self.assertTrue(board.parse_move('1,e,o') is -1)
         self.assertTrue(board.parse_move('e,1,o') is -1)

@@ -63,7 +63,7 @@ class Board(object):
             for j in range(0, 2):
                 if self.board[i][j] == '_':
                     c += 1
-        if c == 0:
-            return True
-        else:
+        if c != 0:
             return False
+        else:
+            return True
