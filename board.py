@@ -40,7 +40,7 @@ class Board(object):
         if move == -1:
             return move
         else:
-            self.mark_square(move)
+            return self.mark_square(move)
 
     def parse_move(self, move):
         moveArr = move.split(',')

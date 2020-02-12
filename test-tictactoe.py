@@ -51,10 +51,10 @@ class Test(unittest.TestCase):
     def test_Player_send_move(self):
         board = Board()
         board.board = [['X', 'X', 'X'], ['_', '_', '_'], ['_', '_', '_']]
-        wantBoard = [['X', 'X', 'X'], ['_','X','_'], ['_', '_', '_']]
+        want_board = [['X', 'X', 'X'], ['_', '_', '_'], ['_', '_', 'X']]
         player = Player('X')
-        player.send_move(board,"2,2,X")
-        self.assertEqual(board.board, wantBoard)
+        valid = player.send_move(board,"2,2,X")
+        self.assertEqual(want_board,valid)
 
 
 if __name__ == '__main__':
