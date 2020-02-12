@@ -36,6 +36,13 @@ class Board(object):
         for pos in self.board:
             print(f"{pos[0]}\t{pos[1]}\t{pos[2]}")
 
+    def recv_move(self,move,player_id):
+        move = self.parse_move(move)
+        if move == -1:
+           return move
+        else:
+            self.mark_square(move)
+
     def parse_move(self, move):
         moveArr = move.split(',')
         if len(moveArr) != 3:
