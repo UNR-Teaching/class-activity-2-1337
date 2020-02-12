@@ -3,6 +3,7 @@
 import unittest
 from tictactoe import *
 from check_winner import check_all_cases
+from player import Player
 
 class Test(unittest.TestCase):
 
@@ -38,11 +39,18 @@ class Test(unittest.TestCase):
 
     def test_check_all_cases(self):
         board = [['X', 'X', 'X'], ['_', '_', '_'], ['_', '_', '_']]
-        self.assertEqual(winner.check_all_cases(board), 1)
+        self.assertEqual(check_all_cases(board), 1)
         board = [['X', '_', 'X'], ['_', '_', '_'], ['_', '_', '_']]
-        self.assertEqual(winner.check_all_cases(board), None)
+        self.assertEqual(check_all_cases(board), None)
         board = [['O', 'O', 'O'], ['_', '_', '_'], ['_', '_', '_']]
-        self.assertEqual(winner.check_all_cases(board), 2)
+        self.assertEqual(check_all_cases(board), 2)
+
+    def test_Player_send_move(self):
+        board = [['X', 'X', 'X'], ['_', '_', '_'], ['_', '_', '_']]
+        wantBoard = [['X', 'X', 'X'], ['_','X','_'], ['_', '_', '_']]
+        player = Player('X')
+        player.send_move(board,"2,2,X")
+        self.assertEqual(board, wantBoard)
 
 
 if __name__ == '__main__':
